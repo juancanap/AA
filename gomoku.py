@@ -1,11 +1,45 @@
 class Juego:
+    agrupacionesJugador = []
     def __init__(self):
         self.tablero = crearTableroVacio()
+        lista = []
+        lista2 = []
+        self.agrupacionesJugador = []
+        self.agrupacionesJugador.append([])
+        self.agrupacionesJugador.append(1,lista)
+        self.agrupacionesJugador.append(2,lista2)
 
     def colocarPieza(self, coord, turno):
         "Coloca en la posicion coord el valor turno"
         self.tablero[coord.f][coord.c] = turno
+        self.agrupacionesJugador[turno]
         return
+
+    def agrupacionesDiagonales(self, turno):
+        "Devuelte las agrupaciones diagonales que me sirven"
+        forms = []
+        form = Formacion(Coord(-1, -1), Coord(-1, -1))
+        for j in range(19):
+            for i in range(19):
+                if(j+i == 19):
+                    break
+                else:
+                    if(self.tablero[j+i][j+i] == turno):
+                        if form.inicio.f == -1:
+                            form.inicio.f = i
+                            form.inicio.c = j
+                            form.fin.f = i
+                            form.fin.c = j
+                        else:
+                            form.fin.f = i
+                            form.fin.c = j
+                            if (i == 18):
+                                forms.append(form)
+                                form = Formacion(Coord(-1, -1), Coord(-1, -1))
+                            else:
+                                if form.fin.f != -1:
+                                    forms.append(form)
+                                    form = Formacion(Coord(-1, -1), Coord(-1, -1))
     def agrupacionesV(self, turno):
         "Devuelte las formaciones horizontales que aun me sirven"
         forms = []
