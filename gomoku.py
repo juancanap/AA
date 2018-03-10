@@ -6,8 +6,8 @@ class Juego:
         lista2 = []
         self.agrupacionesJugador = []
         self.agrupacionesJugador.append([])
-        self.agrupacionesJugador.append(1,lista)
-        self.agrupacionesJugador.append(2,lista2)
+        self.agrupacionesJugador.insert(1, lista)
+        self.agrupacionesJugador.insert(2, lista2)
 
     def colocarPieza(self, coord, turno):
         "Coloca en la posicion coord el valor turno"
@@ -90,9 +90,9 @@ class Juego:
         return
     def printagrupacionesH(self, turno):
         "imprime las formaciones horizontales que aun me sirven"
-        forms = self.formacionesH(turno)
+        forms = self.agrupacionesH(turno)
         for e in forms:
-            print(e.printForm())
+            e.printForm()
 
 
 def crearTableroVacio():
@@ -140,10 +140,12 @@ juego = Juego()
 juego.colocarPieza(Coord(0, 1), 1)
 juego.colocarPieza(Coord(0, 2), 1)
 juego.colocarPieza(Coord(0, 3), 1)
-juego.colocarPieza(Coord(1,1),1)
-juego.colocarPieza(Coord(2,1),1)
-juego.colocarPieza(Coord(3,1),1)
+juego.colocarPieza(Coord(1, 1), 1)
+juego.colocarPieza(Coord(2, 1), 1)
+juego.colocarPieza(Coord(3, 1), 1)
 agrupacioneshorizontales = juego.agrupacionesH(1)
 agrupacionesverticales = juego.agrupacionesV(1)
+
+juego.printagrupacionesH(1)
 
 i = 1
