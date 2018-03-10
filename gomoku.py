@@ -93,8 +93,21 @@ class Juego:
         forms = self.agrupacionesH(turno)
         for e in forms:
             e.printForm()
-
-
+    def printTablero(self):
+        "muestra el tablero actual"
+        str1  = " XX | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18\n"
+        str1 += "------------------------------------------------------------------\n"
+        for i in range(19):
+            for j in range(19):
+                if(j == 0):
+                    if(i>=10):
+                        str1 += " "+ str(i) + " |"
+                    else:
+                        str1 += " 0"+ str(i) + " |"
+                str1 += "  "+str(self.tablero[i][j])
+                if(j==18):
+                    str1 += "\n"
+        print(str1)
 def crearTableroVacio():
     "Crea el tablero vacío"
     tablero = []
@@ -143,6 +156,7 @@ juego.colocarPieza(Coord(0, 3), 1)
 juego.colocarPieza(Coord(1, 1), 1)
 juego.colocarPieza(Coord(2, 1), 1)
 juego.colocarPieza(Coord(3, 1), 1)
+juego.printTablero()
 agrupacioneshorizontales = juego.agrupacionesH(1)
 agrupacionesverticales = juego.agrupacionesV(1)
 
