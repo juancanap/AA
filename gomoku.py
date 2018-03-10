@@ -19,9 +19,9 @@ class Juego:
         "Devuelte las agrupaciones diagonales que me sirven"
         forms = []
         form = Formacion(Coord(-1, -1), Coord(-1, -1))
-        for j in range(19):
-            for i in range(19):
-                if(j+i == 19):
+        for j in range(15):
+            for i in range(15):
+                if(j+i == 15):
                     break
                 else:
                     if(self.tablero[j+i][j+i] == turno):
@@ -33,7 +33,7 @@ class Juego:
                         else:
                             form.fin.f = i
                             form.fin.c = j
-                            if (i == 18):
+                            if (i == 14):
                                 forms.append(form)
                                 form = Formacion(Coord(-1, -1), Coord(-1, -1))
                             else:
@@ -44,8 +44,8 @@ class Juego:
         "Devuelte las formaciones horizontales que aun me sirven"
         forms = []
         form = Formacion(Coord(-1, -1), Coord(-1, -1))
-        for j in range(19):
-            for i in range(19):
+        for j in range(15):
+            for i in range(15):
                 if (self.tablero[i][j] == turno):
                     if form.inicio.f == -1:
                         form.inicio.f = i
@@ -55,7 +55,7 @@ class Juego:
                     else:
                         form.fin.f = i
                         form.fin.c = j
-                    if (i == 18):
+                    if (i == 14):
                         forms.append(form)
                         form = Formacion(Coord(-1, -1), Coord(-1, -1))
                 else:
@@ -67,8 +67,8 @@ class Juego:
         "Devuelte las formaciones horizontales que aun me sirven"
         forms = []
         form = Formacion(Coord(-1, -1), Coord(-1, -1))
-        for i in range(19):
-            for j in range(19):
+        for i in range(15):
+            for j in range(15):
                 if (self.tablero[i][j] == turno):
                     if form.inicio.f == -1:
                         form.inicio.f = i
@@ -78,7 +78,7 @@ class Juego:
                     else:
                         form.fin.f = i
                         form.fin.c = j
-                    if (i == 18):
+                    if (i == 14):
                         forms.append(form)
                         form = Formacion(Coord(-1, -1), Coord(-1, -1))
                 else:
@@ -95,25 +95,25 @@ class Juego:
             e.printForm()
     def printTablero(self):
         "muestra el tablero actual"
-        str1  = " XX | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 15 16 17 18\n"
+        str1  = " XX | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 \n"
         str1 += "------------------------------------------------------------------\n"
-        for i in range(19):
-            for j in range(19):
+        for i in range(15):
+            for j in range(15):
                 if(j == 0):
                     if(i>=10):
                         str1 += " "+ str(i) + " |"
                     else:
                         str1 += " 0"+ str(i) + " |"
                 str1 += "  "+str(self.tablero[i][j])
-                if(j==18):
+                if(j==14):
                     str1 += "\n"
         print(str1)
 def crearTableroVacio():
     "Crea el tablero vacío"
     tablero = []
-    for i in range(19):
+    for i in range(15):
         linea = []
-        for j in range(19):
+        for j in range(15):
             linea.append(0)
         tablero.append(linea)
     return tablero
