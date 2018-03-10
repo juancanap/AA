@@ -40,6 +40,7 @@ class Juego:
                                 if form.fin.f != -1:
                                     forms.append(form)
                                     form = Formacion(Coord(-1, -1), Coord(-1, -1))
+
     def agrupacionesV(self, turno):
         "Devuelte las formaciones horizontales que aun me sirven"
         forms = []
@@ -63,6 +64,7 @@ class Juego:
                         forms.append(form)
                         form = Formacion(Coord(-1, -1), Coord(-1, -1))
         return forms
+
     def agrupacionesH(self, turno):
         "Devuelte las formaciones horizontales que aun me sirven"
         forms = []
@@ -86,13 +88,13 @@ class Juego:
                         forms.append(form)
                         form = Formacion(Coord(-1, -1), Coord(-1, -1))
         return forms
-    def agrupaciones(self, turno):
-        return
+
     def printagrupacionesH(self, turno):
         "imprime las formaciones horizontales que aun me sirven"
         forms = self.agrupacionesH(turno)
         for e in forms:
             e.printForm()
+
     def printTablero(self):
         "muestra el tablero actual"
         str1  = " XX | 00 01 02 03 04 05 06 07 08 09 10 11 12 13 14 \n"
@@ -108,6 +110,7 @@ class Juego:
                 if(j==14):
                     str1 += "\n"
         print(str1)
+
 def crearTableroVacio():
     "Crea el tablero vacío"
     tablero = []
@@ -117,12 +120,6 @@ def crearTableroVacio():
             linea.append(0)
         tablero.append(linea)
     return tablero
-
-
-def valorar(tablero, turno):
-    "Valora el tablero para cada jugador"
-    return
-
 
 def formaciones(tablero, turno):
     "Devuelte las formaciones que aun me sirven"
@@ -136,8 +133,6 @@ class Coord:
 
     def strCoord(self):
         return '(' + str(self.f) + ',' + str(self.c) + ')'
-
-
 
 
 class Formacion:
