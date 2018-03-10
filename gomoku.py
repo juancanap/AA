@@ -1,5 +1,4 @@
 class Juego:
-    # Prueba
     agrupacionesJugador = []
     def __init__(self):
         self.tablero = crearTableroVacio()
