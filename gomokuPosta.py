@@ -72,7 +72,7 @@ class Juego:
                         estaEnRango2 = 0 <= coord.f + pow(-1, i) * v.f * l < 15 and 0 <= coord.c + pow(-1,i) * v.c * l < 15
                     sinficharival[i] = l-1
                     if(not(estaEnRango) or (self.tablero[coord.f+pow(-1,i)*v.f][coord.c+pow(-1,i)*v.c]!= 0)):
-                        if(self.tablero[coord.f+pow(-1,i)*v.f][coord.c+pow(-1,i)*v.c]== 3-turno):
+                        if(estaEnRango and self.tablero[coord.f+pow(-1,i)*v.f][coord.c+pow(-1,i)*v.c]== 3-turno):
                             l = 1
                             estaEnRango = 0 <= coord.f + pow(-1, i) * v.f * l < 15 and 0 <= coord.c + pow(-1,i) * v.c * l < 15
                             while (estaEnRango and self.tablero[coord.f + pow(-1, i) * v.f * l][coord.c + pow(-1, i) * v.c * l] == 3-turno):
@@ -230,7 +230,7 @@ juego.printAgrupaciones(1)
 print("Sus agrupaciones:")
 juego.printAgrupaciones(2)
 juego.printTablero()
-juego.colocarPieza(Coord(2, 4), 1)
+juego.colocarPieza(Coord(14, 14), 1)
 print("Mis agrupaciones:")
 juego.printAgrupaciones(1)
 print("Sus agrupaciones:")
