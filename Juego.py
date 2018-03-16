@@ -36,6 +36,7 @@ class juego:
             cantidad[1]= 0
             sinficharival[0]= 0
             sinficharival[1]= 0
+            modif = []
             for i in range(2):
                 estaEnRango = 0 <= coord.f+pow(-1,i)*v.f < 15 and 0 <= coord.c+pow(-1,i)*v.c < 15
                 if( estaEnRango and self.tablero_actual.tablero[coord.f+pow(-1,i)*v.f][coord.c+pow(-1,i)*v.c] == turno):
@@ -48,16 +49,19 @@ class juego:
                     if(estaEnRango):
                         if (self.tablero_actual.tablero[coord.f + pow(-1, i) * v.f * l][coord.c + pow(-1, i) * v.c * l] == 0):
                             self.tablero_actual.agrupaciones[turno][l - 1][0] -= 1
+                            modif.append(Coord(l-1,0))
                             while (estaEnRango and self.tablero_actual.tablero[coord.f + pow(-1, i) * v.f * l][coord.c + pow(-1, i) * v.c * l] != 3-turno):
                                 l += 1
                                 estaEnRango = 0 <= coord.f + pow(-1, i) * v.f * l < 15 and 0 <= coord.c + pow(-1,i) * v.c * l < 15
                             tapado[i] = 0
                         else:
                             self.tablero_actual.agrupaciones[turno][l-1][1] -= 1
+                            modif.append(Coord(l - 1, 1))
                             tapado[i] = 1
 
                     else:
                         self.tablero_actual.agrupaciones[turno][l-1][1] -= 1
+                        modif.append(Coord(l - 1, 1))
                         tapado[i]=1
                     sinficharival[i] = l - 1
 
@@ -92,12 +96,14 @@ class juego:
                                 self.tablero_actual.agrupaciones[3-turno][l - 1][1] -= 1
 
                         tapado[i]=1
-            if ((cantidad[0] + 1 + cantidad[1] == 5) or (
-                    tapado[0] + tapado[1] < 2 and sinficharival[0] + sinficharival[1] + 1 >= 5)):
-                if (cantidad[0] + 1 + cantidad[1] == 5 and tapado[0] + tapado[1] == 2):
-                    self.tablero_actual.agrupaciones[turno][5][0] += 1
-                else:
-                    self.tablero_actual.agrupaciones[turno][cantidad[0] + 1 + cantidad[1]][tapado[0] + tapado[1]] += 1
+            if(sinficharival[0] + sinficharival[1] + 1<5):
+                for x in modif:
+                    self.tablero_actual.agrupaciones[turno][x.f][x.c] +=1
+            else:
+                    if (cantidad[0] + 1 + cantidad[1] >= 5):
+                        self.tablero_actual.agrupaciones[turno][5][0] += 1
+                    else:
+                        self.tablero_actual.agrupaciones[turno][cantidad[0] + 1 + cantidad[1]][tapado[0] + tapado[1]] += 1
 
 
         return
@@ -124,6 +130,7 @@ class juego:
             cantidad[1]= 0
             sinficharival[0]= 0
             sinficharival[1]= 0
+            modif = []
             for i in range(2):
                 estaEnRango = 0 <= coord.f+pow(-1,i)*v.f < 15 and 0 <= coord.c+pow(-1,i)*v.c < 15
                 if( estaEnRango and tableroEmular.tablero[coord.f+pow(-1,i)*v.f][coord.c+pow(-1,i)*v.c] == turno):
@@ -136,16 +143,19 @@ class juego:
                     if(estaEnRango):
                         if (tableroEmular.tablero[coord.f + pow(-1, i) * v.f * l][coord.c + pow(-1, i) * v.c * l] == 0):
                             tableroEmular.agrupaciones[turno][l - 1][0] -= 1
+                            modif.append(Coord(l-1,0))
                             while (estaEnRango and tableroEmular.tablero[coord.f + pow(-1, i) * v.f * l][coord.c + pow(-1, i) * v.c * l] != 3-turno):
                                 l += 1
                                 estaEnRango = 0 <= coord.f + pow(-1, i) * v.f * l < 15 and 0 <= coord.c + pow(-1,i) * v.c * l < 15
                             tapado[i] = 0
                         else:
                             tableroEmular.agrupaciones[turno][l-1][1] -= 1
+                            modif.append(Coord(l - 1, 1))
                             tapado[i] = 1
 
                     else:
                         tableroEmular.agrupaciones[turno][l-1][1] -= 1
+                        modif.append(Coord(l - 1, 1))
                         tapado[i]=1
                     sinficharival[i] = l - 1
 
@@ -180,11 +190,15 @@ class juego:
                                 tableroEmular.agrupaciones[3-turno][l - 1][1] -= 1
 
                         tapado[i]=1
-            if((cantidad[0]+ 1+ cantidad[1] == 5) or (tapado[0]+ tapado[1] < 2 and sinficharival[0] + sinficharival[1] + 1 >= 5)):
-                if(cantidad[0]+ 1+ cantidad[1] == 5 and tapado[0]+ tapado[1] == 2):
-                    tableroEmular.agrupaciones[turno][5][0] +=1
-                else:
-                    tableroEmular.agrupaciones[turno][cantidad[0]+ 1+ cantidad[1]][tapado[0]+ tapado[1]] += 1
+            if(sinficharival[0] + sinficharival[1] + 1 < 5):
+                for x in modif:
+                    self.tablero_actual.agrupaciones[turno][x.f][x.c] +=1
+            else:
+                if((cantidad[0]+ 1+ cantidad[1] == 5) or (tapado[0]+ tapado[1] < 2)):
+                    if(cantidad[0]+ 1+ cantidad[1] == 5 and tapado[0]+ tapado[1] == 2):
+                        tableroEmular.agrupaciones[turno][5][0] +=1
+                    else:
+                        tableroEmular.agrupaciones[turno][cantidad[0]+ 1+ cantidad[1]][tapado[0]+ tapado[1]] += 1
 
 
         return tableroEmular
@@ -230,15 +244,23 @@ class juego:
         print(str1)
 
     def determinarMejorMovimiento(self,turno,tablero_em):
-        max_valor = 0
+        max_valor = -100
+        movidasMejores = []
         max_coord = (-1, -1)
         for (x, y) in self.tablero_actual.libres:
            tablero_prueba = copy.deepcopy(tablero_em)
            tablero = juego.EmularcolocarPieza(Coord(x,y),turno,tablero_prueba)
            valor = modelo.funcionbjetivo(tablero,turno)
            if valor > max_valor:
+               movidasMejores = []
                max_valor = valor
                max_coord = (x, y)
+               movidasMejores.append(max_coord)
+           if valor == max_valor:
+               max_coord = (x, y)
+               movidasMejores.append(max_coord)
+        posicion = int(random.uniform(0, len(movidasMejores)))
+        max_coord =  movidasMejores[posicion]
         return [max_valor, max_coord]
 
 def crearTableroVacio():
@@ -384,12 +406,14 @@ for (x,y) in juego.tablero_actual.libres:
     if turno == 1:
         [valor,(a,b)]= juego.determinarMejorMovimiento(turno, juego.tablero_actual)
         juego.colocarPieza(Coord(a, b), turno)
-    else:
-        posicion = int(random.uniform(0,len(juego.tablero_actual.libres)))
-        (a,b) =  juego.tablero_actual.libres[posicion]
-        juego.colocarPieza(Coord(a, b), turno)
-    if juego.tablero_actual.JuegoFinalizado():
         juego.printTablero()
+    else:
+        [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+        #posicion = int(random.uniform(0,len(juego.tablero_actual.libres)))
+        #(a,b) =  juego.tablero_actual.libres[posicion]
+        juego.colocarPieza(Coord(a, b), turno)
+        juego.printTablero()
+    if juego.tablero_actual.JuegoFinalizado():
         print("Ganador jugador: "+ str(turno))
 
         break

@@ -1,8 +1,6 @@
-from Tablero import tablero
-from gomoku import Juego
 class modelo:
     def __init__(self):
-        self.pesos = [0.000025, 0.000010, 0.00045, 0.00020, 0.006, 0.003, 0.9, 0.40, -0.000025, -0.000010, -0.00045, -0.00020, -0.006, -0.003, -30, -30, 100,-100]
+        self.pesos = [0.000025, 0.000010, 0.00045, 0.00020, 0.006, 0.003, 0.9, 0.40, -0.000025, -0.000010, -0.00045, -0.00020, -0.5, -0.003, -30, -30, 100,-100]
         self.coeficiente_aprendizaje = 0
         self.ValorEntrenamiento = 0
 
