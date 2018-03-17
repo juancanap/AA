@@ -263,6 +263,71 @@ class juego:
         max_coord =  movidasMejores[posicion]
         return [max_valor, max_coord]
 
+    def jugar_vs_aleatorio(self, turno):
+        for (x, y) in juego.tablero_actual.libres:
+            if turno == 1:
+                [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+                juego.colocarPieza(Coord(a, b), turno)
+                juego.printTablero()
+            else:
+                # [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+                posicion = int(random.uniform(0,len(juego.tablero_actual.libres)))
+                (a,b) =  juego.tablero_actual.libres[posicion]
+                juego.colocarPieza(Coord(a, b), turno)
+                juego.printTablero()
+            if juego.tablero_actual.JuegoFinalizado():
+                print("Ganador jugador: " + str(turno))
+                break
+            else:
+                if turno == 1:
+                    turno = 2
+                else:
+                    turno = 1
+
+    def jugar_vs_si_mismo(self, turno):
+        for (x, y) in juego.tablero_actual.libres:
+            if turno == 1:
+                [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+                juego.colocarPieza(Coord(a, b), turno)
+                juego.printTablero()
+            else:
+                [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+                # posicion = int(random.uniform(0, len(juego.tablero_actual.libres)))
+                # (a, b) = juego.tablero_actual.libres[posicion]
+                juego.colocarPieza(Coord(a, b), turno)
+                juego.printTablero()
+            if juego.tablero_actual.JuegoFinalizado():
+                print("Ganador jugador: " + str(turno))
+                break
+            else:
+                if turno == 1:
+                    turno = 2
+                else:
+                    turno = 1
+
+    def jugar_vs_humano(self, turno):
+        for (x, y) in juego.tablero_actual.libres:
+            if turno == 1:
+                [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+                juego.colocarPieza(Coord(a, b), turno)
+                juego.printTablero()
+            else:
+                a = input("ingrese fila:")
+                b = input("ingrese columna:")
+                # [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+                # posicion = int(random.uniform(0, len(juego.tablero_actual.libres)))
+                # (a, b) = juego.tablero_actual.libres[posicion]
+                juego.colocarPieza(Coord(int(a), int(b)), turno)
+                juego.printTablero()
+            if juego.tablero_actual.JuegoFinalizado():
+                print("Ganador jugador: " + str(turno))
+                break
+            else:
+                if turno == 1:
+                    turno = 2
+                else:
+                    turno = 1
+
 def crearTableroVacio():
     "Crea el tablero vacío"
     tablero = []
@@ -402,26 +467,28 @@ for (x,y) in juego.tablero_actual.libres:
             turno = 1
     juego.printTablero()
 """
-for (x,y) in juego.tablero_actual.libres:
-    if turno == 1:
-        [valor,(a,b)]= juego.determinarMejorMovimiento(turno, juego.tablero_actual)
-        juego.colocarPieza(Coord(a, b), turno)
-        juego.printTablero()
-    else:
-        [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
-        #posicion = int(random.uniform(0,len(juego.tablero_actual.libres)))
-        #(a,b) =  juego.tablero_actual.libres[posicion]
-        juego.colocarPieza(Coord(a, b), turno)
-        juego.printTablero()
-    if juego.tablero_actual.JuegoFinalizado():
-        print("Ganador jugador: "+ str(turno))
+juego.jugar_vs_humano(turno)
 
-        break
-    else:
-        if turno == 1:
-            turno = 2
-        else:
-            turno = 1
+# for (x,y) in juego.tablero_actual.libres:
+#     if turno == 1:
+#         [valor,(a,b)]= juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+#         juego.colocarPieza(Coord(a, b), turno)
+#         juego.printTablero()
+#     else:
+#         [valor, (a, b)] = juego.determinarMejorMovimiento(turno, juego.tablero_actual)
+#         #posicion = int(random.uniform(0,len(juego.tablero_actual.libres)))
+#         #(a,b) =  juego.tablero_actual.libres[posicion]
+#         juego.colocarPieza(Coord(a, b), turno)
+#         juego.printTablero()
+#     if juego.tablero_actual.JuegoFinalizado():
+#         print("Ganador jugador: "+ str(turno))
+#
+#         break
+#     else:
+#         if turno == 1:
+#             turno = 2
+#         else:
+#             turno = 1
 
 
 i = 1
